@@ -1,0 +1,105 @@
+
+{% extends 'recruiter_base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<!-- Hero Area Start-->
+<div class="slider-area ">
+  <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="{% static 'assets/img/hero/about.jpg' %}">
+      <div class="container">
+          <div class="row">
+              <div class="col-xl-12">
+                  <div class="hero-cap text-center">
+                      <h2>" Hire Smarter & Scale Faster "</h2>
+                      
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+  <!-- Hero Area End -->
+
+  <div class="container mt-5">
+    <div class="row">
+        <div class="col-sm-8">
+            <form action="" class="mt-5" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="">Company Name</label>
+                        <input type="text" class="form-control" name="companyname" value="{{ data.company_id.companyname }}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Company Type</label>
+                        <input type="text" class="form-control" name="comptype" value="{{ data.company_type }}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="">Email</label>
+                        <input type="email" class="form-control" name="mail" value="{{ data.company_email }}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="">About Company</label>
+                        <textarea class="form-control" name="about" value="" required>{{ data.about }}</textarea>
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="">City</label>
+                        <input type="text" class="form-control" name="city" value="{{ data.city}}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">State</label>
+                        <input type="text" class="form-control" name="state" value="{{ data.state }}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="">Phone</label>
+                        <input type="number" class="form-control" name="phone" value="{{ data.company_phn}}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Established date</label> <span style="color: red;">[{{ data.est_date }}]</span>
+                        <input type="date" class="form-control" name="date" >
+                    </div>
+                </div>
+                <div class="row">
+                    
+                    <div class="form-group col-md-12">
+                        <label for="">Logo</label>
+                        <input type="file" class="form-control" name="pic" >
+                    </div>
+                </div><br><br>
+            
+                <input type="submit" class="btn head-btn1" value="Update" style="border-radius: 8px;">
+            </form>
+        </div>
+        <div class="col-sm-4 mt-5 text-center">
+            <img src="{{ data.logo.url }}" alt="" width="250px" height="250px" >
+        </div>
+    </div>
+</div>
+
+
+<br><br>
+{% if error %}
+<script>
+    alert('Please add a company before accessing .')
+    window.location=('{% url "recruiter_addcompany" %}')
+</script>
+{% endif %}
+{% if error1 %}
+<script>
+    alert('company profile updated successfully')
+    window.location=('{% url "recruiter_company" %}')
+</script>
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,73 @@
+{% extends 'recruiter_base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm-8">
+            <form action="" class="mt-5" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="">FirstName</label>
+                        <input type="text" class="form-control" name="fname" value="{{ data.recruiter_id.first_name }}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">LastName</label>
+                        <input type="text" class="form-control" name="lname" value="{{ data.recruiter_id.last_name }}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="">Email</label>
+                        <input type="email" class="form-control" name="mail" value="{{ data.recruiter_id.email }}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="">Username</label>
+                        <input type="text" class="form-control" name="uname" value="{{ data.recruiter_id.username }}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="">Company Name</label>
+                        <input type="text" class="form-control" name="compname" value="{{ data.companyname}}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Position</label>
+                        <input type="text" class="form-control" name="position" value="{{ data.position }}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="">Phone</label>
+                        <input type="number" class="form-control" name="phone" value="{{ data.phone}}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Image</label>
+                        <input type="file" class="form-control" name="pic" >
+                    </div>
+                </div><br><br>
+            
+                <input type="submit" class="btn head-btn1" style="border-radius: 8px;">
+            </form>
+        </div>
+        <div class="col-sm-4 mt-5 text-center">
+            <img src="{{ data.image.url }}" alt="" width="250px" height="250px">
+        </div>
+    </div>
+</div>
+
+
+<br><br>
+{% if error1 %}
+<script>
+    alert('Profile updated successfully')
+    window.location=('{% url "recruiter_profile" %}')
+</script>
+{% endif %}
+
+{% endblock content %}

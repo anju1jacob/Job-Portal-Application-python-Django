@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="container mt-5">
+    <div class="password-change-form">
+        <form action="{% url 'update' member.id %}"  method="post" class="container mt-5">
+            <h2>Forgot Password?</h2>
+            {% csrf_token %}
+            <p>To set your new password, use the form below.</p>
+            <label for="" style="margin-top: 3%;"><b>New Password</b></label>
+            <input type="password" class="form-control" placeholder="new password" name="compassword"><br>
+            <label for="" style="margin-top: 3%;"><b>Confirm Password</b></label>
+            <input type="password" class="form-control" placeholder="confirm password" name="comconpassword"><br>
+            <input type="submit" class="btn head-btn1" style="border-radius: 8px;" value="submit">
+        </form>
+    </div>
+</div>
+<br><br>
+<style>
+    .password-change-form {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+</style>
+{% endblock content %}

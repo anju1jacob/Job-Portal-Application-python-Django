@@ -1,0 +1,117 @@
+{% extends 'recruiter_base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .custom-select {
+        width: 100%;
+        /* Adjust the width as needed */
+    }
+</style>
+<!-- Hero Area Start-->
+<div class="slider-area ">
+    <div class="single-slider section-overly slider-height2 d-flex align-items-center"
+        data-background="{% static 'assets/img/hero/about.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center">
+                        <h2>Empower dreams. Post a job, shape a career.</h2>
+                        <!-- Every job is a self-portrait of the person who does it. Autograph your work with excellence -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hero Area End -->
+
+<form action="#" class="container mt-5" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="">Job Title</label>
+            <input type="text" class="form-control" name="title" placeholder="Enter Job Title" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="">End Date</label>
+            <input type="date" class="form-control" name="enddate" placeholder="Enter enddate" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label for="">Description</label>
+            <textarea class="form-control" name="description" placeholder="Enter description" required></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label for="">Required Knowledge, Skills (comma-separated)</label>
+            <textarea class="form-control" name="requirements" placeholder="Enter Knowledge, Skills"
+                required></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label for="">Education + Experience (comma-separated)</label>
+            <textarea class="form-control" name="experience" placeholder="Enter Education + Experience"
+                required></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="job_type">Job Type:</label>
+            <div class=""> <!-- Adjust the width as needed -->
+                <select id="job_type" name="job_type" class="form-control custom-select">
+                    {% for type in job_types %}
+                    <option value="{{ type.0 }}">{{ type.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="">Salary</label>
+            <input type="text" class="form-control" name="salary" placeholder="Enter salary" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="">location</label>
+            <input type="text" class="form-control" name="location" placeholder="Enter job location" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="">vaccancy</label>
+            <input type="number" class="form-control" name="vaccancy" placeholder="Enter vaccany" required>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="form-group col-md-6">
+            <label for="is_available">Is Available:</label>
+            <input type="checkbox" id="is_available" name="is_available">
+
+        </div>
+    </div>
+
+    <br>
+
+    <center><input type="submit" class="btn head-btn1" style="border-radius: 8px;"></center>
+</form>
+<br><br>
+
+{% if error %}
+<script>
+    alert('Please add a company before accessing job post session.')
+    window.location = ('{% url "recruiter_addcompany" %}')
+    
+</script>
+{% endif %}
+
+{% if success_message %}
+    <script>
+        alert('New job post added successfully.')
+        window.location=('{% url "recruiter_home" %}')
+    </script>
+{% endif %}
+{% endblock content %}

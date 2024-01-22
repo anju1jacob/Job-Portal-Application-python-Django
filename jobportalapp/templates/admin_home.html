@@ -1,0 +1,171 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card h-100 gradient-bg-pink-navy">
+                <div class="card-body">
+                    <h5 class="card-title text-center"><b style="color: white;">Jobseeker's</b></h5>
+                    <div class="col-md-4 market-update-right" style="float: right; margin-top: 15%;">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                    </div>
+                    <h3 style="color: white;">{{total}}</h3>
+                    <h4 style="color: white;">Total Candidates</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 gradient-bg-pink-navy">
+                <div class="card-body">
+                    <h5 class="card-title text-center"><b style="color: white;">Recruiter's</b></h5>
+
+                    <div class="col-md-4 market-update-right" style="float: right; margin-top: 15%;">
+                        <i class="fa fa-user-secret" aria-hidden="true"></i>
+                    </div>
+                    <h3 style="color: white;">{{totalcount}}</h3>
+                    <h4 style="color: white;">Total Recruiters</h4>
+                    <p style="color: white; margin-top: 10%;">Approval Required : {{ pendingcount }}</p>
+                    <p style="color: white;">Accepted members: {{ acceptedcount }}</p>
+                    <p style="color: white;">Rejected members : {{ rejectcount }}</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 gradient-bg-pink-navy">
+                <div class="card-body">
+                    <h5 class="card-title text-center"><b style="color: white;">Jobs</b></h5>
+                    <div class="col-md-4 market-update-right" style="float: right; margin-top: 15%;">
+                        <i class="fa fa-briefcase" aria-hidden="true"></i>
+                    </div>
+                    <p class="card-text"></p>
+                    <h3 style="color: white;">{{jobs}}</h3>
+                    <h4 style="color: white;">Total Jobs</h4>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
+<div class="container">
+    <div class="row">
+        <div class="panel panel-primary col-md-5" >
+            <div class="panel-heading" style="text-align:center;">
+                <h6 class="panel-title" style="color: black;"><b>Recent Recruiters</b></h6>
+            </div>
+            <table class="table table-hover table-striped" id="dev-table">
+                <thead style="background-color: rgb(250, 222, 187);">
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Company</th>
+                        <th>Phone</th>
+                        <th>Status</th>
+
+                    </tr>
+                </thead>
+                {% for d in provider|slice:":5" %}
+                <tr>
+                    <td> {{d.recruiter_id.first_name}} </td>
+                    </td>
+                    <td>{{d.recruiter_id.email}}</td>
+                    <td>{{d.companyname}}</td>
+                    <td>{{d.phone}}</td>
+                    {% if d.status == 'accepted' %}
+                    <td> <span class="label label-primary">Accepted</span></td>
+                    {% elif d.status == 'rejected' %}
+                    <td> <span class="label label-primary">Rejected</span></td>
+                    {% else %}
+                    <td> <span class="label label-success">Pending</span></td>
+                    {% endif %}
+
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="panel panel-primary col-md-5" style="margin-left:15%;">
+            <div class="panel-heading" style="text-align:center;">
+                <h6 class="panel-title" style="color: black;"><b>Recent Candidates</b></h6>
+            </div>
+            <table class="table table-hover table-striped" id="dev-table">
+                <thead style="background-color:  rgb(250, 222, 187);">
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                    </tr>
+                </thead>
+                {% for d in candidate|slice:":5" %}
+                <tr>
+                    <td> {{d.emp_id.first_name}} </td>
+                    </td>
+                    <td>{{d.emp_id.email}}</td>
+                    <td>{{d.phone}}</td>
+
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+<br><br>
+<style>
+    .gradient-bg-pink-navy {
+        background: linear-gradient(to right, #f561bf, #8abef2);
+        /* Replace with the desired dark pink and navy blue shades' hex codes */
+        border-radius: 10px;
+        /* Optional: Add border radius for styling */
+    }
+
+    .market-update-right i.fa.fa-users {
+        font-size: 3em;
+        color: #d668f7;
+        width: 80px;
+        height: 80px;
+        background: #fff;
+        text-align: center;
+        border-radius: 49px;
+        -webkit-border-radius: 49px;
+        -moz-border-radius: 49px;
+        -o-border-radius: 49px;
+        line-height: 1.7em;
+
+    }
+    .market-update-right i.fa.fa-briefcase {
+        font-size: 3em;
+        color: #d668f7;
+        width: 80px;
+        height: 80px;
+        background: #fff;
+        text-align: center;
+        border-radius: 49px;
+        -webkit-border-radius: 49px;
+        -moz-border-radius: 49px;
+        -o-border-radius: 49px;
+        line-height: 1.7em;
+
+    }
+
+    .market-update-right i.fa.fa-user-secret {
+        font-size: 3em;
+        color: #d668f7;
+        width: 80px;
+        height: 80px;
+        background: #fff;
+        text-align: center;
+        border-radius: 49px;
+        -webkit-border-radius: 49px;
+        -moz-border-radius: 49px;
+        -o-border-radius: 49px;
+        line-height: 1.7em;
+
+    }
+</style>
+
+
+{% endblock content %}

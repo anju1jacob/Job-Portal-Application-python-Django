@@ -1,0 +1,64 @@
+{% extends 'recruiter_base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .password-change-form {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<script>
+    function checkpwd() {
+        if (document.changepwd.newpwd.value != document.changepwd.cnewpwd.value) {
+            alert('New password is not match with confirm password');
+            document.changepwd.cnewpwd.focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+
+
+<div class="container mt-5">
+    <div class="password-change-form">
+        <form action="" onsubmit="return checkpwd()" name="changepwd" method="post" class="container mt-5">
+            {% csrf_token %}
+            <p>To set your new password, use the form below.</p>
+            <label for="" style="margin-top: 3%;"><b>Current Password</b></label>
+            <input type="password" class="form-control" name="currentpwd" placeholder="Enter your current password"
+                required="true"><br>
+
+            <label for=""><b>New Password</b></label>
+            <input type="password" class="form-control" name="newpwd" placeholder="Enter New password" required="true">
+
+            <label for="" style="margin-top: 3%;"><b>Confirm New Password</b></label>
+            <input type="password" class="form-control" name="cnewpwd" placeholder="Confirm new password"
+                required="true"><br>
+
+            <input type="submit" class="btn head-btn1" style="border-radius: 8px;" value="Update">
+        </form>
+    </div>
+</div>
+
+
+<br><br>
+{% if error1 %}
+<script>
+    alert('Password updated successfully')
+    window.location = ('{% url "logout_user" %}')
+</script>
+{% endif %}
+
+{% if error2 %}
+<script>
+    alert('current password is wrong')
+</script>
+{% endif %}
+
+{% endblock content %}

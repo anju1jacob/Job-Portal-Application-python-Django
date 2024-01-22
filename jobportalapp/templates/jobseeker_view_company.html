@@ -1,0 +1,61 @@
+{% extends 'jobseeker_base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Hero Area Start-->
+<div class="slider-area ">
+    <div class="single-slider section-overly slider-height2 d-flex align-items-center"
+        data-background="{% static 'assets/img/hero/about.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center">
+                        <h2>Build your career with top companies!</h2>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hero Area End -->
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-xl-10">
+            <!-- single-job-content -->
+            {% for i in data %}
+            <div class="single-job-items mb-30">
+                <div class="job-items">
+                    <div class="company-img">
+                        <a href="#"><img src="{{ i.logo.url }}" alt="" width="60px" height="60px"
+                                style="border: 1px solid #28395a"></a>
+                    </div>
+                    <div class="job-tittle">
+                        <a href="job_details.html">
+                            <h4>{{ i.company_id.companyname }}</h4>
+                        </a>
+                        <ul>
+    
+                            <li>{{ i.company_type }}</li>
+                            <li><i class="fas fa-map-marker-alt"></i>{{i.city}},{{ i.state }}</li>
+                            <li> Est.Date :  {{i.est_date}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="items-link f-right">
+                    
+                    <a href="/jobseeker_view_companydetails/{{i.id}}">View Details</a>
+    
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+</div>
+
+
+<br><br>
+{% endblock content %}

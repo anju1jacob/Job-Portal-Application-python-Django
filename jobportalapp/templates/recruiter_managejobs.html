@@ -1,0 +1,61 @@
+{% extends 'recruiter_base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="slider-area ">
+    <div class="single-slider section-overly slider-height2 d-flex align-items-center"
+        data-background="{% static 'assets/img/hero/about.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center">
+                        <h2>
+                            "Empower your team: manage jobs, attract talent, succeed."</h2>
+                        <!-- Every job is a self-portrait of the person who does it. Autograph your work with excellence -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hero Area End -->
+
+<div class="container mt-5">
+    <div class="card mx-auto" style="width: 76rem;">
+        <div class="card-body">
+            <h5 class="card-title mb-3 text-center">Manage Jobs</h5>
+            <table class="table table-bordered">
+                <thead style="background-color:rgb(220, 103, 103)">
+                    <tr>
+                        <th scope="col">Job Title</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Salary</th>
+                        <th scope="col">No. of applicant</th>
+                        <th scope="col">status</th>
+                        <th scope="col">Action</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for job in jobs %}
+                    <tr style="background-color:rgb(255, 240, 221);">
+                        <td>{{ job.title}}</td>
+                        <td>{{ job.location}}</td>
+                        <td>{{ job.salary}}</td>
+                        <td>{{job.apply_set.all.count}} </a></td>
+                        {% if job.is_available %}
+                        <td><span class="badge bg-success">Active</span></td>
+                        {% else %}
+                        <td><span class="badge bg-warning">Not Active</span></td>
+                        {% endif %}
+                        <td> <a class="genric-btn success btn-sm" onclick="return confirm(' Do you want to update this record?')"
+                            href="{% url 'recruiter_update_jobpost' job.id %}"><span class="fa fa-pencil fa-lg"></span></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<br><br>
+{% endblock content %}

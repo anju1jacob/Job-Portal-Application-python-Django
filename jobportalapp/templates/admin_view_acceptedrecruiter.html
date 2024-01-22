@@ -1,0 +1,54 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container" style="margin-top: 3%;">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 class="panel-title text-center" style="color: black;">Accepted Recruiter List</h4>
+            <hr>
+        </div>
+        <table class="table table-hover" id="example">
+            <thead style="background-color:rgb(220, 103, 103)">
+                <tr >
+                    <th>Sr.No</th>
+                    <th>Name</th>
+                    <th>Profile Picture</th>
+                    <th>Email</th>
+                    <th>Company Name</th>
+                    <th>Position</th>
+                    <th>Contact</th>
+                    <th>Action</th>
+                    <th>Change Status</th>
+                </tr>
+            </thead>
+            {% for i in data %}
+            <tr style="background-color:rgb(255, 240, 221);">
+                <td>{{ forloop.counter}}</td>
+                <td> {{i.recruiter_id.first_name}} {{i.recruiter_id.last_name}}</td>
+                <td> <img src="{{ i.image.url }}" alt="Profile Pic" height="50px" width="50px"
+                        style="border-radius: 50%;" /></td>
+                <td>{{i.recruiter_id.email}}</td>
+                <td>{{ i.companyname }}</td>
+                <td>{{ i.position }}</td>
+                <td>{{i.phone}}</td>
+                <td>
+                     <a class="genric-btn danger btn-sm"  onclick="return confirm(' Do you want to delete this record?')" 
+                     href="admin_delete_acceptedrecruiter/{{ i.id }}"><span class="fa-solid fa-trash-can fa-lg"></span></a>&nbsp;
+
+                    </td>
+                    <td>
+                        <a class="genric-btn success btn-sm" onclick="return confirm(' Do you want to reject this record?')"
+                     href="admin_reject_acceptedrecruiter/{{ i.id }}"><span class="fa fa-times fa-lg"></span></a>
+                     
+                     <a class="genric-btn warning btn-sm" onclick="return confirm(' Do you want to move this record pending list?')"
+                     href="admin_pending_acceptedrecruiter/{{ i.id }}"><span class="fa-regular fa-hourglass-half fa-lg"></span></a>
+                     
+                    </td>
+            {% endfor %}
+        </table>
+      
+    </div>
+</div>
+<br><br>
+{% endblock content %}

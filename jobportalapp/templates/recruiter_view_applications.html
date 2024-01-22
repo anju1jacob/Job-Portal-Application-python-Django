@@ -1,0 +1,84 @@
+{% extends 'recruiter_base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="slider-area ">
+    <div class="single-slider section-overly slider-height2 d-flex align-items-center"
+        data-background="{% static 'assets/img/hero/about.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center">
+                        <h2>
+                            Every job is a self-portrait of the person who does it. Autograph your work with excellence
+                        </h2>
+                        <!-- Every job is a self-portrait of the person who does it. Autograph your work with excellence -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hero Area End -->
+
+<div class="container-fluid mt-5">
+    <div class="card mx-auto" style="width: 75rem; ">
+        <div class="job-cards-container ">
+            {% for i in jobs %}
+            <div class="job-card col-md-3">
+                <h3 class="text-center"> {{i.title}}</h3>
+                <hr>
+                <p style="margin-left: 5%;"><i class="fa fa-building" aria-hidden="true"></i><span
+                        style="margin-left: 5%;">{{i.apply_set.all.count}} </span></p>
+                <p style="margin-left: 5%;"> <i class="fa fa-map-marker" aria-hidden="true"></i><span
+                        style="margin-left: 5%;">{{i.location}}</span></p>
+                <p style="margin-left: 5%;"> <i class="fa fa-credit-card" aria-hidden="true"></i><span
+                        style="margin-left: 5%;">{{i.salary}}</span></p>
+            
+                        <a href="{% url 'recruiter_view_listof_application' i.id %}" class="btn btn-sm" style="float: right;">View All</a>
+
+            </div>
+            {% endfor %}
+            <!-- Add more job cards here -->
+        </div>
+    </div>
+
+</div><br><br>
+
+<style>
+    .job-cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 35px;
+        margin: 4%;
+       
+    }
+
+    .job-card {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 20px;
+        width: 200px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: rgb(244, 233, 221);
+    }
+
+    .job-card h2 {
+        margin-top: 0;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 18px;
+        background-color: #3498db;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #2980b9;
+    }
+</style>
+{% endblock content %}

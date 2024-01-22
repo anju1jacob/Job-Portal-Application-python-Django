@@ -1,0 +1,102 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block content %}
+
+
+<script>
+    function checkpass() {
+        if (document.signup.pwd.value != document.signup.cpwd.value) {
+            alert('Please check the password is correct');
+            document.signup.cpwd.focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+
+
+<!-- Hero Area Start-->
+<div class="slider-area ">
+  <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="{% static 'assets/img/hero/about.jpg' %}">
+      <div class="container">
+          <div class="row">
+              <div class="col-xl-12">
+                  <div class="hero-cap text-center">
+                      <h2>Build Your Profile To Get Started</h2>
+                      
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+  <!-- Hero Area End -->
+
+
+  <form action="#" class="container mt-5" onsubmit="return checkpass();" name="signup" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+   
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="">FirstName</label>
+            <input type="text" class="form-control" name="fname" placeholder="Enter Your FirstName" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="">LastName</label>
+            <input type="text" class="form-control" name="lname" placeholder="Enter Your LastName">
+        </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+          <label for="">Email</label>
+          <input type="email" class="form-control" name="mail" placeholder="Enter email address" required>
+      </div>
+  </div>
+  <div class="row">
+      <div class="form-group col-md-12">
+          <label for="">UserName</label>
+          <input type="text" class="form-control" name="uname" placeholder="Enter username" required>
+      </div>
+  </div>
+  <div class="row">
+      <div class="form-group col-md-6">
+          <label for="">Password</label>
+          <input type="password" class="form-control" name="pwd" placeholder="Enter password" required>
+      </div>
+      <div class="form-group col-md-6">
+          <label for="">Confirm Password</label>
+          <input type="password" class="form-control" name="cpwd" placeholder="confirm password" required>
+      </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-6">
+        <label for="">Company Name</label>
+        <input type="text" class="form-control" name="cmpname" placeholder="Enter company name" required>
+    </div>
+    <div class="form-group col-md-6">
+        <label for="">Position</label>
+        <input type="text" class="form-control" name="position" placeholder="Enter your position" required>
+    </div>
+</div>
+  <div class="row">
+      <div class="form-group col-md-6">
+          <label for="">Phone</label>
+          <input type="number" class="form-control" name="phone" placeholder="Enter Your phonenumber">
+      </div>
+      <div class="form-group col-md-6">
+          <label for="">Image</label>
+          <input type="file" class="form-control" name="pic" required>
+      </div>
+  </div><br>
+
+  <center><input type="submit" class="btn head-btn1" style="border-radius: 8px;"></center>
+  </form>
+<br><br>
+
+{% if success_message %}
+    <script>
+        alert('New recruiter added successfully.')
+        window.location=('{% url "admin_home" %}')
+    </script>
+{% endif %}
+{% endblock content %}

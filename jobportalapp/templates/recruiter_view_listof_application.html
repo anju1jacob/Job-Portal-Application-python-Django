@@ -1,0 +1,300 @@
+{% load static %}
+{% block content %}
+
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Job portal </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/slicknav.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/price_rangs.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+
+<body>
+
+    <header>
+        <!-- Header Start -->
+        <div class="header-area header-transparrent">
+            <div class="headder-top header-sticky">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3 col-md-2">
+                            <!-- Logo -->
+                            <div class="logo">
+                                <a href="index.html"><img src="{% static 'assets/img/logo/logo.png' %}" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9">
+                            <div class="menu-wrapper">
+                                <!-- Main-menu -->
+                                <div class="main-menu">
+                                    <nav class="d-none d-lg-block">
+                                        <ul id="navigation">
+                                            <li><a href="/recruiter_home">Home</a></li>
+                                            <li><a href="/recruiter_postjob">Post a Job </a></li>
+                                            <li><a href="/recruiter_managejobs">Manage Jobs</a></li>
+                                            <li><a href="/recruiter_view_applications">Applications</a></li>
+                                            <li><a href="/recruiter_company_gallery">Gallary</a></li>
+                                            <li><a href=""></a></li>
+                                            <li><a href="#">
+                                                {% if request.user.is_authenticated and request.user.usertype == 'recruiter' %}
+                                                <img src="{{ recruiter_image }}" alt="profilepic" height="61px" width="64px" style="border-radius: 50%;">
+                                                {% endif %}
+                                                </a>
+                                                <ul class="submenu">
+                                                    <li><a href="#">{{ request.user.first_name }} {{request.user.last_name }}</a></li>
+                                                    <li><a href="#">User Type : {{ request.user.usertype }}</a></li>
+                                                    <hr style="border-top: 1px solid #ccc;margin: 5px 0;"> <!-- Line -->
+                                                    <li><a href="/recruiter_profile"><i class="fa fa-user"
+                                                        aria-hidden="true"></i>&nbsp; My Profile</a></li>
+                                                        <li><a href="/recruiter_company"><i class="fa fa-home"
+                                                            aria-hidden="true"></i>&nbsp; Company Profile</a></li>
+                                                    <li><a href="/recruiter_changepwd"><i class="fa fa-unlock-alt"
+                                                                aria-hidden="true"></i>&nbsp; Change password</a></li>
+                                                    <li><a href="/logout_user"><i class="fa-solid fa-right-from-bracket"></i>&nbsp;
+                                                            Logout</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- Mobile Menu -->
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+    <div class="slider-area ">
+        <div class="single-slider section-overly slider-height2 d-flex align-items-center"
+            data-background="{% static 'assets/img/hero/about.jpg' %}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center">
+                            <h2>
+                                "Empower your team: Choose candidate, succeed."</h2>
+                            <!-- Every job is a self-portrait of the person who does it. Autograph your work with excellence -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero Area End -->
+    
+    <div class="container mt-5">
+        
+ <div class="card mx-auto" style="width: 76rem;">
+    <div class="card-body">
+        <h5 class="card-title mb-3 text-center">All Applicant for {{jobs.title}} Position</h5>
+        <table class="table table-bordered">
+            <thead style="background-color:rgb(220, 103, 103)">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Application date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Resume</th>
+                    <th scope="col">Action</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for applicant in applicants %}
+                <tr style="background-color:rgb(255, 240, 221);">
+                    <td>{{ applicant.applicant.emp_id.first_name}} {{ applicant.applicant.emp_id.last_name}}</td>
+                    <td><img src="{{ applicant.applicant.image.url}}" alt="profilepic"  height="50px" width="50px"
+                    style="border-radius: 50%;"></td>
+                    <td>{{ applicant.applicant.emp_id.email}}</td>
+                    <td>{{ applicant.applicant.phone}}</td>
+                    <td>{{ applicant.applydate|date:"d M Y" }}</td>
+                    <td>{{ applicant.status }}</td>
+                    <td><a href="{{ applicant.resume.url }}" style="color: blue;"><small>download cv</small></a></td>
+                    <td>
+                        <a class="genric-btn info btn-sm" onclick="return confirm(' Do you want to accept this applicant?')"
+                            href="{% url 'recruiter_accept_applicant' applicant.id %}"><span
+                                class="fa-solid fa-check fa-lg"></span></a>&nbsp;
+    
+                        <a class="genric-btn success btn-sm" onclick="return confirm(' Do you want to reject this applicant?')"
+                            href="{% url 'recruiter_reject_applicant' applicant.id %}"><span class="fa fa-times fa-lg"></span></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<br><br>
+
+    </div>
+   
+    <footer>
+        <!-- Footer Start-->
+        <div class="footer-area footer-bg footer-padding">
+            <div class="container">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-footer-caption mb-50">
+                            <div class="single-footer-caption mb-30">
+                                <div class="footer-tittle">
+                                    <h4>About Us</h4>
+                                    <div class="footer-pera">
+                                        <p>Heaven frucvitful doesn't cover lesser dvsays appear creeping seasons so
+                                            behold.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Contact Info</h4>
+                                <ul>
+                                    <li>
+                                        <p>Address :Your address goes
+                                            here, your demo address.</p>
+                                    </li>
+                                    <li><a href="#">Phone : +8880 44338899</a></li>
+                                    <li><a href="#">Email : info@colorlib.com</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Important Link</h4>
+                                <ul>
+                                    <li><a href="#"> View Project</a></li>
+                                    <li><a href="#">Contact Us</a></li>
+                                    <li><a href="#">Testimonial</a></li>
+                                    <li><a href="#">Proparties</a></li>
+                                    <li><a href="#">Support</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Newsletter</h4>
+                                <div class="footer-pera footer-pera2">
+                                    <p>Heaven fruitful doesn't over lesser in days. Appear creeping.</p>
+                                </div>
+                                <!-- Form -->
+                                <div class="footer-form">
+                                    <div id="mc_embed_signup">
+                                        <form target="_blank"
+                                            action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                                            method="get" class="subscribe_form relative mail_part">
+                                            <input type="email" name="email" id="newsletter-form-email"
+                                                placeholder="Email Address" class="placeholder hide-on-focus"
+                                                onfocus="this.placeholder = ''"
+                                                onblur="this.placeholder = ' Email Address '">
+                                            <div class="form-icon">
+                                                <button type="submit" name="submit" id="newsletter-submit"
+                                                    class="email_icon newsletter-submit button-contactForm"><img
+                                                        src="{% static 'assets/img/icon/form.png' %}" alt=""></button>
+                                            </div>
+                                            <div class="mt-10 info"></div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+                <div class="row footer-wejed justify-content-between">
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                        <!-- logo -->
+                        <div class="footer-logo mb-20">
+                            <a href="index.html"><img src="{% static 'assets/img/logo/logo2_footer.png' %}" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <div class="footer-tittle-bottom">
+                            <span>5000+</span>
+                            <p>Talented Hunter</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <div class="footer-tittle-bottom">
+                            <span>451</span>
+                            <p>Talented Hunter</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <!-- Footer Bottom Tittle -->
+                        <div class="footer-tittle-bottom">
+                            <span>568</span>
+                            <p>Talented Hunter</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer-bottom area -->
+        <div class="footer-bottom-area footer-bg">
+            <div class="container">
+                <div class="footer-border">
+                    <div class="row d-flex justify-content-between align-items-center">
+                        <div class="col-xl-10 col-lg-10 ">
+                            <div class="footer-copy-right">
+                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                    Copyright &copy;
+                                    <script>document.write(new Date().getFullYear());</script> All rights reserved |
+                                    This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a
+                                        href="https://colorlib.com" target="_blank">Colorlib</a>
+                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2">
+                            <div class="footer-social f-right">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-globe"></i></a>
+                                <a href="#"><i class="fab fa-behance"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End-->
+    </footer>
+    {% endblock content %}
+

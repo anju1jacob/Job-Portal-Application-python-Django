@@ -1,0 +1,186 @@
+{% extends 'recruiter_base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="slider-area ">
+    <div class="overly ">
+        <div id="boxx">
+            <div style="padding-top: 80px">
+                <div id="box1" class="text-center"><b><br>
+                        <a style="font-size: 40px; color: white;">
+                            {{ data.recruiter_id.first_name }} {{ data.recruiter_id.last_name }}
+                        </a>
+                </div>
+            </div>
+            <div>
+                <img src="{{ data.image.url }}" id="box">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<br><br>
+
+<!-- Support Company Start-->
+<div class="support-company-area support-padding fix">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-xl-6 col-lg-6">
+                <div class="right-caption">
+                    <!-- Section Tittle -->
+                    <div class="section-tittle section-tittle2">
+                        <span>What we are doing</span>
+                        <h2>Looking for a candidate?</h2>
+                    </div>
+                    <div class="support-caption">
+                        <p class="pera-top">We will help you find the best talent in the industry, with the experience
+                            you want, so you can focus on running your business.</p>
+                        <p>Mollit anim laborum.Duis aute irufg dhjkolohr in re voluptate velit esscillumlore eu quife
+                            nrulla parihatur. Excghcepteur signjnt occa cupidatat non inulpadeserunt mollit aboru.
+                            temnthp incididbnt ut labore mollit anim laborum suis aute.</p>
+                        <a href="/recruiter_addcompany" class="btn post-btn">Add Your Company</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Content -->
+            <div class="col-xl-4 col-lg-4" style="margin-left: 7%;">
+                <div class="post-details3  mb-50">
+                    <!-- Small Section Tittle -->
+                    <div class="small-section-tittle">
+                        <h4>Profile Overview</h4>
+                    </div>
+                    <ul>
+                        <li>Name  : <span>{{ data.recruiter_id.first_name }} {{ data.recruiter_id.last_name }}</span> </li>
+                        <li>User Type : <span>{{ request.user.usertype }}</span></li>
+                        <li>Created  : <span>{{ request.user.date_joined }}</span></li>
+                        <li>Last Visited : <span>{{ request.user.last_login }}</span></li>
+                        
+                    </ul>
+                    <div class="apply-btn2">
+                        <a href="recruiter_profile" class="btn">View Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <!-- Support Company End-->
+
+    <!-- How  Apply Process Start-->
+    <div class="apply-process-area apply-bg pt-150 pb-150"
+        data-background="{% static 'assets/img/gallery/how-applybg.png' %}">
+        <div class="container">
+            <!-- Section Tittle -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-tittle white-text text-center">
+                        <span>Recruiting process</span>
+                        <h2> How it works</h2>
+                    </div>
+                </div>
+            </div>
+            <!-- Apply Process Caption -->
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-process text-center mb-30">
+                        <div class="process-ion">
+                            <span class="flaticon-search"></span>
+                        </div>
+                        <div class="process-cap">
+                            <h5>1. Register Company</h5>
+                            <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-process text-center mb-30">
+                        <div class="process-ion">
+                            <span class="flaticon-curriculum-vitae"></span>
+                        </div>
+                        <div class="process-cap">
+                            <h5>2. Post Job Opening</h5>
+                            <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-process text-center mb-30">
+                        <div class="process-ion">
+                            <span class="flaticon-tour"></span>
+                        </div>
+                        <div class="process-cap">
+                            <h5>3. Get the right one</h5>
+                            <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- How  Apply Process End-->
+
+
+    </main>
+
+    <style>
+        /* body {
+            background-color: lavender;
+        } */
+
+        #boxx {
+            width: 100%;
+            height: 250px;
+            z-index: 1;
+            margin-top: 2%;
+            position: relative;
+            /* Ensure positioning context for absolute positioning */
+        }
+
+        #box1 {
+            width: 100%;
+            height: 70px;
+            background-color: #1f2b7b;
+        }
+
+        #box {
+            width: 220px;
+            height: 220px;
+            position: absolute;
+            /* Position the image absolutely */
+            top: 50%;
+            /* Shift the top of the image to the middle */
+            left: 20%;
+            /* Shift the left of the image to the middle */
+            transform: translate(-50%, -50%);
+            /* Center the image */
+            border-radius: 50%;
+            z-index: 9;
+            background-color: rgb(255, 255, 255);
+        }
+
+        .overly {
+            position: relative;
+            z-index: 0
+        }
+
+        .woverly::before {
+            position: absolute;
+            content: "";
+            background-color: white;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            z-index: -1;
+            background-repeat: no-repeat
+        }
+    </style>
+
+    {% endblock content %}

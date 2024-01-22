@@ -1,0 +1,84 @@
+
+{% extends 'recruiter_base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<!-- Hero Area Start-->
+<div class="slider-area ">
+  <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="{% static 'assets/img/hero/about.jpg' %}">
+      <div class="container">
+          <div class="row">
+              <div class="col-xl-12">
+                  <div class="hero-cap text-center">
+                      <h2>" Hire Smarter & Scale Faster "</h2>
+                      
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+  <!-- Hero Area End -->
+
+
+  <form action="#" class="container mt-5"  method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+   
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="">Company Type</label>
+            <input type="text" class="form-control" name="comptype" placeholder="Enter Your Company type" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="">Company Logo</label>
+            <input type="file" class="form-control" name="pic" required>
+        </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+          <label for="">Company Email</label>
+          <input type="email" class="form-control" name="mail" placeholder="Enter email address" required>
+      </div>
+  </div>
+  <div class="row">
+      <div class="form-group col-md-12">
+          <label for="">About Company</label>
+          <textarea class="form-control" name="about" placeholder="Enter about the company" required></textarea>
+      </div>
+  </div>
+  <div class="row">
+      <div class="form-group col-md-6">
+          <label for="">City</label>
+          <input type="text" class="form-control" name="city" placeholder="Enter city" required>
+      </div>
+      <div class="form-group col-md-6">
+          <label for="">State</label>
+          <input type="text" class="form-control" name="state" placeholder="Enter state" required>
+      </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-6">
+        <label for="">Establish Date</label>
+        <input type="date" class="form-control" name="date" placeholder="Enter established date" required>
+    </div>
+    <div class="form-group col-md-6">
+        <label for="">Company PhoneNumber</label>
+        <input type="number" class="form-control" name="phone" placeholder="Enter company phonenumber">
+    </div>
+</div>
+<br>
+
+  <center><input type="submit" class="btn head-btn1" style="border-radius: 8px;"></center>
+  </form>
+<br><br>
+
+{% if success_message %}
+    <script>
+        alert('Company details added successfully.')
+        window.location=('{% url "recruiter_company" %}')
+    </script>
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,136 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+  /* General styles */
+  .div1 {
+    display: flex;
+    width: 80%;
+    height: 500px;
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Shadow effect */
+  }
+
+  .sliding-images {
+    width: 50%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    /* Ensure children align properly */
+    height: 100%;
+    /* Occupy full height */
+  }
+
+  .sliding-images img {
+    width: 100%;
+    display: block;
+    height: 100%;
+    /* Force images to take up full height */
+    object-fit: cover;
+    /* Maintain aspect ratio and cover the area */
+  }
+
+  .login-container {
+    width: 50%;
+    background-color: #f5d7d7;
+    /* Background color for the right side */
+    padding: 55px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-left: 2%;
+    height: 100%;
+    /* Occupy full height */
+  }
+
+  input[type="text"],
+  input[type="password"],
+  button {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+
+  button {
+    background-color: #eb346b;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #ec1757;
+  }
+
+  .error-message {
+    color: red;
+  }
+
+  a {
+    text-decoration: none;
+    color: rgb(255, 0, 81);
+  }
+
+  a:hover {
+    color: white
+  }
+</style>
+<div class="container div1" style="margin-top: 4%;">
+  <div class="sliding-images">
+    <img src="{% static 'assets/img/new/19873.jpg'%}" alt="Image 1">
+    <img src="{% static 'assets/img/new/5244090.jpg'%}" alt="Image 2">
+    <img src="{% static 'assets/img/new/6771194.jpg'%}" alt="Image 3">
+    <img src="{% static 'assets/img/new/4861019.jpg'%}" alt="Image 4">
+  </div>
+
+  <div class="login-container">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}}" role="alert">
+      <b>{{ message }}</b>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <h3>Let's get started now!</h3>
+    <p style="color: black;">Login and find your dream job</p>
+    <form id="loginForm" style="margin-top: 5%;" method="post">
+      {% csrf_token %}
+      <input type="text"  name="email" placeholder="Username or Email" required>
+      <input type="password"  name="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+    <p id="error" class="error-message"></p>
+    <p style="color: red;"><a href="{% url 'forgetpwd' %}">Forgot password?</a></p>
+  </div>
+</div>
+<br><br><br><br>
+<script>
+  let slideIndex = 0;
+  const images = document.querySelectorAll('.sliding-images img');
+
+  function showSlides() {
+    for (let i = 0; i < images.length; i++) {
+      images[i].style.display = 'none';
+    }
+    slideIndex++;
+    if (slideIndex > images.length) {
+      slideIndex = 1;
+    }
+    images[slideIndex - 1].style.display = 'block';
+    setTimeout(showSlides, 2000); // Change image every 2 seconds
+  }
+
+  showSlides();
+
+</script>
+
+{% endblock content %}

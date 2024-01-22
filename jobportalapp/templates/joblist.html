@@ -1,0 +1,100 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load humanize %}
+{% load widget_tweaks %}
+{% block content %}
+
+  <!-- Hero Area Start-->
+  <div class="slider-area ">
+    <div class="single-slider section-overly slider-height2 d-flex align-items-center" 
+    data-background="{% static 'assets/img/hero/about.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center">
+                        <h2>if a window of opportunity appears, don't pull down the shade...</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 
+<----- searching------> 
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+            <form class="row gy-2 gx-3 align-items-center" method="get">
+                <div class="col-sm-2">
+                    <label for="autoSizingInput" >Job Title</label>
+                    {% render_field filter.form.title class="form-control" id="autoSizingInput" placeholder="job keyword" %}
+                   
+                </div>
+                <div class="col-sm-3">
+                    <label for="autoSizingInput" >Select Location</label>
+                    {% render_field filter.form.location class="form-select" placeholder="job location"%}
+                </div>
+                <div class="col-sm-3">
+                    <label for="autoSizingInput" >choose job type</label>
+                    {% render_field filter.form.job_type class="form-select"%}
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Featured_job_start -->
+<section class="featured-job-area feature-padding">
+    <div class="container">
+        <!-- Section Tittle -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-tittle text-center">
+                    <span>Recent Job</span>
+                    <h2>Featured Jobs</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xl-10">
+                <!-- single-job-content -->
+                {% for i in filter.qs %}
+                <div class="single-job-items mb-30">
+                    <div class="job-items">
+                        <div class="company-img">
+                            <a href="#"><img src="{{ i.job_compid.logo.url }}" alt=""width="60px" height="60px" style="border: 1px solid #28395a"></a>
+                        </div>
+                        <div class="job-tittle">
+                            <a href="job_details.html"><h4>{{ i.title}}</h4></a>
+                            <ul>
+                               
+                                <li>{{ i.job_id.companyname }}</li>
+                                <li><i class="fas fa-map-marker-alt"></i>{{i.location}}</li>
+                                <li> <i class="fa fa-inr"></i>{{ i.salary }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="items-link f-right">
+                        <a href="">{{ i.job_type }}</a>
+                        {% if i.id in li %}
+                        <a href="">Applied</a>
+                        {% else %}
+                        <a href="jobseeker_jobdetails/{{i.id}}">Apply Now</a>
+                        {% endif %}
+                                    <span>{{ i.startdate|naturaltime }}</span>
+                    </div>
+                </div>
+                {% endfor %}    
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Featured_job_end -->
+
+
+{% endblock content %}
