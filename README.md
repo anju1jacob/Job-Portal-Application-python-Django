@@ -52,24 +52,20 @@ INSTALLED_APPS = [
 3. using the default sqlite3 database and add the database credentials to settings.py
 
 
-5. Run database migrations
+4. Run database migrations
 
-```
 
 python manage.py makemigrations
 python manage.py migrate
 
-```
 
-6. Start the development server
+5. Start the development server
 
-```
 
 python manage.py runserver
 
-```
 
-7. Open the website in your browser at http://localhost:8000
+6. Open the website in your browser at http://localhost:8000
 
 
 ### add email and password for the the email sending
